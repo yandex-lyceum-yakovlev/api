@@ -49,3 +49,16 @@ def get_ll_span(address):
     span = f"{dx},{dy}"
 
     return ll, span
+
+
+def get_coordinates(address):
+    toponym = geocode(address)
+    if not toponym:
+        return None, None
+
+    # Координаты центра топонима:
+    toponym_coodrinates = toponym["Point"]["pos"]
+    # Широта, преобразованная в плавающее число:
+    toponym_longitude, toponym_lattitude = toponym_coodrinates.split(" ")
+    return float(toponym_longitude), float(toponym_lattitude)
+
